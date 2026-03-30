@@ -25,10 +25,6 @@ git clone https://github.com/NotBadSlime/genshin-tier.git
 
 支持角色榜 / 武器榜 / 命座榜（一群一场，开局时选择类型）。
 
-## 作者
-
-NotBadSlime
-
 ## 仓库
 
 https://github.com/NotBadSlime/genshin-tier
