@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <title>从夯到拉</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: #1e272e;
+      color: #ecf0f1;
+      padding: 18px 16px 24px;
+      min-width: 680px;
+      max-width: 920px;
+    }
+    .wrap { margin: 0 auto; }
+    .head {
+      text-align: center;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(255,255,255,.1);
+    }
+    .head h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .head .theme {
+      margin-top: 8px;
+      font-size: 16px;
+      color: #dfe6e9;
+      font-weight: 600;
+    }
+    .head .theme span { color: #74b9ff; }
+    .head .board-kind {
+      margin-top: 4px;
+      font-size: 13px;
+      color: #a29bfe;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+    .tip {
+      text-align: center;
+      font-size: 12px;
+      color: #b2bec3;
+      margin-bottom: 14px;
+      min-height: 18px;
+    }
+    /* TierMaker 风格：左侧色条标签 + 右侧自适应换行 */
+    .tier-row {
+      display: flex;
+      width: 100%;
+      min-height: 56px;
+      margin-bottom: 4px;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.35);
+      border: 1px solid rgba(0,0,0,.25);
+    }
+    .tier-label {
+      flex: 0 0 108px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 8px;
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,.4);
+      letter-spacing: 1px;
+      border-right: 4px solid rgba(0,0,0,.2);
+    }
+    .tier-label--h { background: linear-gradient(180deg, #e74c3c, #c0392b); }
+    .tier-label--t { background: linear-gradient(180deg, #f39c12, #d68910); }
+    .tier-label--r { background: linear-gradient(180deg, #3498db, #2874a6); }
+    .tier-label--n { background: linear-gradient(180deg, #9b59b6, #6c3483); }
+    .tier-label--l { background: linear-gradient(180deg, #95a5a6, #7f8c8d); }
+    .tier-body {
+      flex: 1;
+      min-width: 0;
+      background: #2d3436;
+      padding: 8px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      align-items: flex-start;
+      gap: 6px 8px;
+    }
+    .empty-hint {
+      color: #636e72;
+      font-size: 13px;
+      font-style: italic;
+      padding: 8px 4px;
+    }
+    .chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      width: 56px;
+    }
+    .chip-img-wrap {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+    .chip-img-wrap img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,.12);
+      background: #1e272e;
+      display: block;
+    }
+    .chip.weapon .chip-img-wrap img {
+      object-fit: contain;
+      padding: 3px;
+      border-color: rgba(253, 203, 110, .35);
+      background: rgba(0,0,0,.35);
+    }
+    .chip.cons .chip-img-wrap img {
+      border-color: rgba(162, 155, 254, .45);
+      box-shadow: 0 0 0 1px rgba(108, 92, 231, .25);
+    }
+    .chip.cons-art .chip-img-wrap img {
+      object-fit: contain;
+      padding: 3px;
+      background: rgba(0,0,0,.3);
+    }
+    .chip-img-wrap .ph {
+      display: block;
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.06);
+      border: 2px dashed rgba(255,255,255,.1);
+      box-sizing: border-box;
+    }
+    .cons-badge {
+      position: absolute;
+      right: -4px;
+      bottom: -3px;
+      min-width: 16px;
+      padding: 1px 4px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(108, 92, 231, .95), rgba(162, 155, 254, .9));
+      border-radius: 5px;
+      border: 1px solid rgba(255,255,255,.4);
+      line-height: 1.15;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0,0,0,.45);
+      pointer-events: none;
+    }
+    .chip .nm {
+      font-size: 10px;
+      line-height: 1.15;
+      color: #b2bec3;
+      text-align: center;
+      word-break: break-all;
+      max-width: 56px;
+    }
+    .pool {
+      margin-top: 16px;
+      background: rgba(0,0,0,.22);
+      border-radius: 10px;
+      padding: 12px 12px 14px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .pool h2 {
+      font-size: 14px;
+      color: #81ecec;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .pool .meta {
+      font-size: 11px;
+      color: #636e72;
+      margin-bottom: 8px;
+    }
+    .pool-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px 6px;
+      align-items: flex-start;
+    }
+    .chip-sm { width: 46px; }
+    .chip-sm .chip-img-wrap,
+    .chip-sm .chip-img-wrap img,
+    .chip-sm .chip-img-wrap .ph { width: 40px; height: 40px; border-radius: 6px; }
+    .chip-sm.weapon .chip-img-wrap img { object-fit: contain; padding: 2px; border-color: rgba(253, 203, 110, .3); }
+    .chip-sm.cons .chip-img-wrap img { border-color: rgba(162, 155, 254, .4); }
+    .chip-sm.cons-art .chip-img-wrap img { object-fit: contain; padding: 2px; }
+    .chip-sm .cons-badge { font-size: 9px; min-width: 14px; padding: 0 3px; right: -3px; bottom: -2px; }
+    .chip-sm .nm { font-size: 9px; max-width: 46px; }
+    .foot {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 10px;
+      color: #636e72;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <h1>从夯到拉 · 排行</h1>
+    <div class="theme">主题：<span>{{theme}}</span></div>
+    {{if boardKind}}<div class="board-kind">{{boardKind}}</div>{{/if}}
+  </header>
+  <div class="tip">{{tip}}</div>
+
+  {{each tierBlocks row}}
+  <div class="tier-row">
+    <div class="tier-label tier-label--{{row.slug}}">{{row.label}}</div>
+    <div class="tier-body">
+      {{if row.chips && row.chips.length}}
+      {{each row.chips item}}
+      <div class="chip{{if item.isWeapon}} weapon{{/if}}{{if item.isCons}} cons{{/if}}{{if item.consUseArt}} cons-art{{/if}}">
+        <div class="chip-img-wrap">
+          {{if item.face}}<img src="{{_miao_path}}{{item.face}}" alt=""/>{{else}}<span class="ph"></span>{{/if}}
+          {{if item.consBadge}}<span class="cons-badge">{{item.consBadge}}</span>{{/if}}
+        </div>
+        <span class="nm">{{item.name}}</span>
+      </div>
+      {{/each}}
+      {{else}}
+      <span class="empty-hint">（本档暂无）</span>
+      {{/if}}
+    </div>
+  </div>
+  {{/each}}
+
+  <section class="pool">
+    <h2>未排位池</h2>
+    <div class="meta">共 {{unrankedTotal}} 项未归入上表{{if unrankedMore > 0}} · 下图仅展示前 72 项{{/if}}</div>
+    {{if unrankedRows && unrankedRows.length}}
+    <div class="pool-grid">
+      {{each unrankedRows item}}
+      <div class="chip chip-sm{{if item.isWeapon}} weapon{{/if}}{{if item.isCons}} cons{{/if}}{{if item.consUseArt}} cons-art{{/if}}">
+        <div class="chip-img-wrap">
+          {{if item.face}}<img src="{{_miao_path}}{{item.face}}" alt=""/>{{else}}<span class="ph"></span>{{/if}}
+          {{if item.consBadge}}<span class="cons-badge">{{item.consBadge}}</span>{{/if}}
+        </div>
+        <span class="nm">{{item.name}}</span>
+      </div>
+      {{/each}}
+    </div>
+    {{else}}
+    <div style="color:#636e72;font-size:13px;">（已全部排位）</div>
+    {{/if}}
+  </section>
+
+  <p class="foot">参考布局 · TierMaker 风格 · 图标来自喵喵</p>
+</div>
+</body>
+</html>

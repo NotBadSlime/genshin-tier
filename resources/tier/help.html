@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width"/>
+  <title>从夯到拉 · 帮助</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+      background: linear-gradient(168deg, #0f1419 0%, #1e272e 40%, #2d3436 100%);
+      color: #dfe6e9;
+      padding: 26px 22px 30px;
+      min-width: 640px;
+      max-width: 700px;
+    }
+    .wrap { margin: 0 auto; }
+    .hero {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .hero::after {
+      content: "";
+      display: block;
+      width: 140px;
+      height: 3px;
+      margin: 14px auto 0;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, #e74c3c, #f39c12, #3498db, #9b59b6, #95a5a6, transparent);
+    }
+    .hero h1 {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      background: linear-gradient(120deg, #fff 0%, #fab1a0 35%, #74b9ff 70%, #dfe6e9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #8395a7;
+      letter-spacing: 1px;
+    }
+    .hero .author {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #636e72;
+      letter-spacing: 1px;
+    }
+    .tier-legend {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .tier-pill {
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,.25);
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .tier-pill.h { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+    .tier-pill.t { background: linear-gradient(135deg, #f39c12, #d68910); }
+    .tier-pill.r { background: linear-gradient(135deg, #3498db, #2874a6); }
+    .tier-pill.n { background: linear-gradient(135deg, #9b59b6, #6c3483); }
+    .tier-pill.l { background: linear-gradient(135deg, #95a5a6, #7f8c8d); }
+    .card {
+      background: linear-gradient(145deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.02) 100%);
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 14px;
+      padding: 14px 16px 16px;
+      margin-bottom: 11px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, #e74c3c, #c0392b);
+      box-shadow: 0 2px 10px rgba(231, 76, 60, .35);
+    }
+    .wrap > section.card:nth-child(3) .badge { background: linear-gradient(135deg, #f39c12, #d68910); box-shadow: 0 2px 10px rgba(243, 156, 18, .3); }
+    .wrap > section.card:nth-child(4) .badge { background: linear-gradient(135deg, #3498db, #2874a6); }
+    .wrap > section.card:nth-child(5) .badge { background: linear-gradient(135deg, #55efc4, #00b894); }
+    .wrap > section.card:nth-child(6) .badge { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+    .card-head h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f5f6fa;
+      letter-spacing: 1px;
+    }
+    .card ul { list-style: none; padding: 0; }
+    .card li {
+      font-size: 13px;
+      line-height: 1.78;
+      color: #b2bec3;
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .card li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #e74c3c;
+      font-size: 11px;
+      top: 2px;
+    }
+    .wrap > section.card:nth-child(4) li::before { color: #3498db; }
+    .wrap > section.card:nth-child(5) li::before { color: #00b894; }
+    .wrap > section.card:nth-child(6) li::before { color: #a29bfe; }
+    kbd, .cmd {
+      display: inline-block;
+      font-family: "Consolas", "Monaco", monospace;
+      font-size: 11.5px;
+      padding: 2px 7px;
+      margin: 0 2px;
+      border-radius: 6px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.1);
+      color: #ffeaa7;
+    }
+    .note {
+      margin-top: 12px;
+      padding: 11px 13px;
+      border-radius: 10px;
+      background: rgba(116, 185, 255, .08);
+      border: 1px solid rgba(116, 185, 255, .22);
+      font-size: 12px;
+      line-height: 1.65;
+      color: #a8d8ea;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 11px;
+      color: #636e72;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>从夯到拉 · 使用指南</h1>
+    <p>TierMaker 风格排行 · 一群一场 · 主题可选角色 / 武器 / 命座</p>
+    <p class="author">作者 · NotBadSlime</p>
+    <div class="tier-legend">
+      <span class="tier-pill h">夯</span>
+      <span class="tier-pill t">顶级</span>
+      <span class="tier-pill r">人上人</span>
+      <span class="tier-pill n">NPC</span>
+      <span class="tier-pill l">拉完了</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <div class="card-head">
+      <span class="badge">1</span>
+      <h2>开局</h2>
+    </div>
+    <ul>
+      <li>仅在<strong>群聊</strong>使用；<strong>同一群同时只能有一场</strong>夯拉（不论类型），进行中时需先 <span class="cmd">#结束夯拉</span>。</li>
+      <li><span class="cmd">#角色从夯到拉 主题</span>（与 <span class="cmd">#从夯到拉 主题</span> 相同）→ 本场<strong>只排角色</strong>，不会出现武器或命座条目。</li>
+      <li><span class="cmd">#武器从夯到拉 主题</span> → 本场<strong>只排武器</strong>。</li>
+      <li><span class="cmd">#命座从夯到拉 主题</span> → 本场<strong>只排命座</strong>（每名角色 0～6 命各一条）；纯角色名视为 <strong>0 命</strong>。</li>
+      <li>主题用于长图标题，建议简短（最多约 80 字）。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <span class="badge">2</span>
+      <h2>排位与飞榜</h2>
+    </div>
+    <ul>
+      <li>指令形式：<span class="cmd">#…排夯</span> / <span class="cmd">排顶级</span> 等；移出所有档位可用 <span class="cmd">#…飞榜</span> / <span class="cmd">#…爬</span> / <span class="cmd">#…滚</span>（同义）。写入内容<strong>仅取决于本场开局类型</strong>，不会跨类型误判。</li>
+      <li><strong>命座常用写法</strong>（可去空格）：<span class="cmd">钟离二命</span>、<span class="cmd">纳西妲6命</span>、<span class="cmd">胡桃C2</span>、<span class="cmd">6命纳西妲</span>、<span class="cmd">二命钟离</span>、<span class="cmd">某某满命</span>；中文数字 零〇一二两三四五六。</li>
+      <li><strong>批量</strong>：「排」前多项用空格或 ，、 分隔，例如命座场 <span class="cmd">#钟离 胡桃二命 排夯</span>（钟离为 0 命、胡桃为 2 命）。</li>
+      <li>每条只占一档；换档会自动从原档移除。</li>
+      <li><strong>主人专用（仅角色榜）</strong>：<span class="cmd">#其余角色排夯</span> 或 <span class="cmd">#其他角色排顶级</span> 等，将<strong>未排位池内全部实装角色</strong>一次性写入对应档位；非主人使用会提示无权限。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <span class="badge">3</span>
+      <h2>长图与未排位池</h2>
+    </div>
+    <ul>
+      <li>每次成功排位后生成<strong>排行长图</strong>，标题旁标注 <strong>角色榜 / 武器榜 / 命座榜</strong>。</li>
+      <li><strong>命座图标</strong>：若喵喵素材中存在该角 <span class="cmd">icons/cons-1</span>～<span class="cmd">cons-6</span>，则优先显示命座图标；<strong>0 命</strong>或缺少素材时，用<strong>角色头像 + 右下角角标</strong>（数字或「满」）表示命数。</li>
+      <li>底部<strong>未排位池</strong>仅本场未排位条目；过多时只展示前 72 项（命座场池子较大属正常）。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <span class="badge">4</span>
+      <h2>结束</h2>
+    </div>
+    <ul>
+      <li><span class="cmd">#结束夯拉</span> 或 <span class="cmd">#重置夯拉</span> 结束当前这一场（任意类型）。</li>
+      <li><span class="cmd">#结束角色夯拉</span> / <span class="cmd">#结束武器夯拉</span> / <span class="cmd">#结束命座夯拉</span> 与上面等价，均为结束当前场。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <span class="badge">?</span>
+      <h2>本页</h2>
+    </div>
+    <ul>
+      <li>发送 <span class="cmd">#夯拉帮助</span> 可随时查看本说明图。</li>
+    </ul>
+  </section>
+
+  <div class="note">
+    若群开启「仅 @ 机器人 响应」，请 @ 机器人或使用群配置的前缀后再发指令。
+  </div>
+
+  <p class="footer">GENSHIN TIER · YUNZAI PLUGIN · 作者 NotBadSlime</p>
+</div>
+</body>
+</html>
