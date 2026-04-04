@@ -121,7 +121,9 @@
     }
     .chip.weapon .chip-img-wrap img {
       object-fit: contain;
+      object-position: center;
       padding: 3px;
+      box-sizing: border-box;
       border-color: rgba(253, 203, 110, .35);
       background: rgba(0,0,0,.35);
     }
@@ -133,6 +135,10 @@
       object-fit: contain;
       padding: 3px;
       background: rgba(0,0,0,.3);
+    }
+    .chip.member .chip-img-wrap img {
+      border-color: rgba(116, 185, 255, .4);
+      box-shadow: 0 0 0 1px rgba(116, 185, 255, .2);
     }
     .chip-img-wrap .ph {
       display: block;
@@ -196,7 +202,7 @@
     .chip-sm .chip-img-wrap,
     .chip-sm .chip-img-wrap img,
     .chip-sm .chip-img-wrap .ph { width: 40px; height: 40px; border-radius: 6px; }
-    .chip-sm.weapon .chip-img-wrap img { object-fit: contain; padding: 2px; border-color: rgba(253, 203, 110, .3); }
+    .chip-sm.weapon .chip-img-wrap img { object-fit: contain; object-position: center; padding: 2px; box-sizing: border-box; border-color: rgba(253, 203, 110, .3); }
     .chip-sm.cons .chip-img-wrap img { border-color: rgba(162, 155, 254, .4); }
     .chip-sm.cons-art .chip-img-wrap img { object-fit: contain; padding: 2px; }
     .chip-sm .cons-badge { font-size: 9px; min-width: 14px; padding: 0 3px; right: -3px; bottom: -2px; }
@@ -225,9 +231,9 @@
     <div class="tier-body">
       {{if row.chips && row.chips.length}}
       {{each row.chips item}}
-      <div class="chip{{if item.isWeapon}} weapon{{/if}}{{if item.isCons}} cons{{/if}}{{if item.consUseArt}} cons-art{{/if}}">
+      <div class="chip{{if item.isWeapon}} weapon{{/if}}{{if item.isCons}} cons{{/if}}{{if item.consUseArt}} cons-art{{/if}}{{if item.isMember}} member{{/if}}">
         <div class="chip-img-wrap">
-          {{if item.face}}<img src="{{_miao_path}}{{item.face}}" alt=""/>{{else}}<span class="ph"></span>{{/if}}
+          {{if item.face}}{{if item.faceIsData}}<img src="{{item.face}}" alt=""/>{{else}}<img src="{{_miao_path}}{{item.face}}" alt=""/>{{/if}}{{else}}<span class="ph"></span>{{/if}}
           {{if item.consBadge}}<span class="cons-badge">{{item.consBadge}}</span>{{/if}}
         </div>
         <span class="nm">{{item.name}}</span>
@@ -246,9 +252,9 @@
     {{if unrankedRows && unrankedRows.length}}
     <div class="pool-grid">
       {{each unrankedRows item}}
-      <div class="chip chip-sm{{if item.isWeapon}} weapon{{/if}}{{if item.isCons}} cons{{/if}}{{if item.consUseArt}} cons-art{{/if}}">
+      <div class="chip chip-sm{{if item.isWeapon}} weapon{{/if}}{{if item.isCons}} cons{{/if}}{{if item.consUseArt}} cons-art{{/if}}{{if item.isMember}} member{{/if}}">
         <div class="chip-img-wrap">
-          {{if item.face}}<img src="{{_miao_path}}{{item.face}}" alt=""/>{{else}}<span class="ph"></span>{{/if}}
+          {{if item.face}}{{if item.faceIsData}}<img src="{{item.face}}" alt=""/>{{else}}<img src="{{_miao_path}}{{item.face}}" alt=""/>{{/if}}{{else}}<span class="ph"></span>{{/if}}
           {{if item.consBadge}}<span class="cons-badge">{{item.consBadge}}</span>{{/if}}
         </div>
         <span class="nm">{{item.name}}</span>
@@ -260,7 +266,7 @@
     {{/if}}
   </section>
 
-  <p class="foot">参考布局 · TierMaker 风格 · 图标来自喵喵</p>
+  <p class="foot">参考布局 · TierMaker 风格 · 角色/武器/命座图标来自喵喵 · 群友榜头像来自 QQ</p>
 </div>
 </body>
 </html>

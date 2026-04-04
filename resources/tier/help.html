@@ -163,7 +163,7 @@
 <div class="wrap">
   <header class="hero">
     <h1>从夯到拉 · 使用指南</h1>
-    <p>TierMaker 风格排行 · 一群一场 · 主题可选角色 / 武器 / 命座</p>
+    <p>TierMaker 风格排行 · 一群一场 · 主题可选角色 / 武器 / 命座 / 群友</p>
     <p class="author">作者 · NotBadSlime</p>
     <div class="tier-legend">
       <span class="tier-pill h">夯</span>
@@ -184,6 +184,7 @@
       <li><span class="cmd">#角色从夯到拉 主题</span>（与 <span class="cmd">#从夯到拉 主题</span> 相同）→ 本场<strong>只排角色</strong>，不会出现武器或命座条目。</li>
       <li><span class="cmd">#武器从夯到拉 主题</span> → 本场<strong>只排武器</strong>。</li>
       <li><span class="cmd">#命座从夯到拉 主题</span> → 本场<strong>只排命座</strong>（每名角色 0～6 命各一条）；纯角色名视为 <strong>0 命</strong>。</li>
+      <li><span class="cmd">#群友从夯到拉 主题</span> → 本场为<strong>群友榜</strong>：开局时快照本群成员（不含机器人），长图展示<strong>群名片/昵称 + 头像</strong>；排位与飞榜<strong>必须 @ 指定对象</strong>，不可仅靠打字（避免同名）。</li>
       <li>主题用于长图标题，建议简短（最多约 80 字）。</li>
     </ul>
   </section>
@@ -195,10 +196,11 @@
     </div>
     <ul>
       <li>指令形式：<span class="cmd">#…排夯</span> / <span class="cmd">排顶级</span> 等；移出所有档位可用 <span class="cmd">#…飞榜</span> / <span class="cmd">#…爬</span> / <span class="cmd">#…滚</span>（同义）。写入内容<strong>仅取决于本场开局类型</strong>，不会跨类型误判。</li>
+      <li><strong>群友榜</strong>：排位/飞榜<strong>只能依赖消息里的 @</strong>（可多 @ 批量），<span class="cmd">#</span> 与 <span class="cmd">排XX</span> 之间的文字<strong>不会</strong>作为选人依据；可直接发 <span class="cmd">排夯</span> / <span class="cmd">飞榜</span>（<strong>可不写 #</strong>），或 <span class="cmd">#排夯</span>。群内重名时请用艾特区分。</li>
       <li><strong>命座常用写法</strong>（可去空格）：<span class="cmd">钟离二命</span>、<span class="cmd">纳西妲6命</span>、<span class="cmd">胡桃C2</span>、<span class="cmd">6命纳西妲</span>、<span class="cmd">二命钟离</span>、<span class="cmd">某某满命</span>；中文数字 零〇一二两三四五六。</li>
       <li><strong>批量</strong>：「排」前多项用空格或 ，、 分隔，例如命座场 <span class="cmd">#钟离 胡桃二命 排夯</span>（钟离为 0 命、胡桃为 2 命）。</li>
       <li>每条只占一档；换档会自动从原档移除。</li>
-      <li><strong>主人专用（仅角色榜）</strong>：<span class="cmd">#其余角色排夯</span> 或 <span class="cmd">#其他角色排顶级</span> 等，将<strong>未排位池内全部实装角色</strong>一次性写入对应档位；非主人使用会提示无权限。</li>
+      <li><strong>主人专用（仅角色榜）</strong>：<span class="cmd">#其余角色排夯</span> 或 <span class="cmd">#其他角色排顶级</span> 等，将<strong>未排位池内全部实装角色</strong>一次性写入对应档位；非主人使用会提示无权限。群友榜下该指令不可用。</li>
     </ul>
   </section>
 
@@ -208,7 +210,7 @@
       <h2>长图与未排位池</h2>
     </div>
     <ul>
-      <li>每次成功排位后生成<strong>排行长图</strong>，标题旁标注 <strong>角色榜 / 武器榜 / 命座榜</strong>。</li>
+      <li>每次成功排位后生成<strong>排行长图</strong>，标题旁标注 <strong>角色榜 / 武器榜 / 命座榜 / 群友榜</strong>。</li>
       <li><strong>命座图标</strong>：若喵喵素材中存在该角 <span class="cmd">icons/cons-1</span>～<span class="cmd">cons-6</span>，则优先显示命座图标；<strong>0 命</strong>或缺少素材时，用<strong>角色头像 + 右下角角标</strong>（数字或「满」）表示命数。</li>
       <li>底部<strong>未排位池</strong>仅本场未排位条目；过多时只展示前 72 项（命座场池子较大属正常）。</li>
     </ul>
